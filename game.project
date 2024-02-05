@@ -1,0 +1,43 @@
+[project]
+title = playable_ad_example
+version = 1.4.0
+
+[bootstrap]
+main_collection = /example/main.collectionc
+
+[input]
+game_binding = /builtins/input/all.input_bindingc
+use_accelerometer = 0
+
+[display]
+width = 640
+height = 1136
+high_dpi = 1
+
+[ios]
+bundle_identifier = com.example.todo
+
+[osx]
+bundle_identifier = com.example.todo
+
+[android]
+input_method = HiddenInputField
+
+[script]
+shared_state = 1
+
+[html5]
+engine_arguments = --verify-graphics-calls=false
+show_made_with_defold = 0
+show_fullscreen_button = 0
+scale_mode = stretch
+cssfile = /builtins/manifests/web/dark_theme.css
+heap_size = 64
+splash_image = /example/web/splash.png
+
+[graphics]
+texture_profiles = /example/profiles/no_mipmaps.texture_profiles
+
+[native_extension]
+app_manifest = /example/no_basis_liveupdate_physics.appmanifest
+

@@ -1,0 +1,49 @@
+name: Build example
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - '*'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2
+
+      - name: Install Java ♨️
+        uses: actions/setup-java@v2
+        with:
+          distribution: "temurin"
+          java-version: "17"
+
+      - name: Install Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+
+      - name: Install Zstd
+        run: |
+          sudo apt-get install -y zstd
+
+      - name: Build 🔧
+        run: |
+          lsb_release -a
+
+          npm install --global gulp-cli
+
+          cd playable_ad
+          npm install
+          gulp
+
+          mkdir public
+          mv build/output_js-web/playable_ad_example/playable_ad_example.html public/index.html
+
+      - name: Deploy to Pages 🚀
+        if: github.ref == 'refs/heads/master'
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          branch: gh-pages
+          folder: playable_ad/public
